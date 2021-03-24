@@ -219,7 +219,6 @@ class CfgFunctions
 			class weaponTurretAim {R;};
 			class weaponSubmunition {R;};
 			class weaponRocketsalvo {R;};
-			class weaponguncontrol {R;};
 		};
 		class functions
 		{
