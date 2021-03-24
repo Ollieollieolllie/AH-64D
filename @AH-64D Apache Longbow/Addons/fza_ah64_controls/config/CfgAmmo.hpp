@@ -48,10 +48,13 @@ class CfgAmmo
 	
 	class fza_30x113: B_30mm_HE
 	{
+		ace_frag_enabled = 0;
+		ace_frag_skip = 1;
+
 		soundsetbulletfly[] = {"fza_sc_bullet_flyby_soundset"};
 		soundsetsoniccrack[] = {"fza_sc_30x113_soundset"};
 		soundsetexplosion[] = {"fza_20mm_explosion_soundset", "fza_explosion_echo_small_soundset"};
-		hit = 60;
+		hit = 50;
 		indirectHit = 10;
 		indirectHitRange = 3.5;		
 		maxspeed = 805;
@@ -66,6 +69,10 @@ class CfgAmmo
 	//////////////////////////////HELLFIRE/////////////////////////////////
 	///////////////////////////////////////////////////////////////////////	
 	class fza_agm114base : Missile_AGM_02_F {
+
+		ace_frag_enabled = 0;
+		ace_frag_skip = 1;
+
 		fza_salType = "sal1";
 		irLock						= 1;
 		laserLock					= 0;
@@ -87,6 +94,15 @@ class CfgAmmo
 		timeToLive					= 70;
 		cmImmunity					= 1;
 
+		//Penetrator
+		submunitionAmmo="ammo_Penetrator_AGM_01";
+		submunitionDirectionType="SubmunitionModelDirection";
+		submunitionInitSpeed=1000;
+		submunitionParentSpeedCoef=0;
+		submunitionInitialOffset[]={0,0,-0.2};
+		triggerOnImpact=1;
+		deleteParentWhenTriggered=0;
+
 		effectsmissile = "fza_ah64_hellfiresmoke";
 		muzzleEffect = "BIS_fnc_effectFiredHeliRocket";
 		effectsMissileInit = "MissileDAR1";
@@ -98,7 +114,7 @@ class CfgAmmo
 
 		//Missile sensors definition
 		missileLockMaxDistance	= 8000;
-		missileLockMinDistance	= 200;
+		missileLockMinDistance	= 700;
 		missileLockMaxSpeed		= 56;
 		missileLockCone			= 90;
 		missileKeepLockedCone	= 90;
@@ -173,9 +189,9 @@ class CfgAmmo
 		proxyShape="\fza_ah64_US\fza_agm114l";
 		simulation = "shotMissile";
 		
-		hit = 1400;
-		indirectHit = 1000;
-		indirectHitRange = 10;
+		hit = 600;
+		indirectHit = 200;
+		indirectHitRange = 4;
 		cost = 1000;	
 
 		airLock = 0;
@@ -200,9 +216,9 @@ class CfgAmmo
 		model = "\fza_ah64_us\fza_agm114k"; 
 		proxyShape="\fza_ah64_us\fza_agm114k";	
 		
-		hit = 1400;
-		indirectHit = 1000;
-		indirectHitRange = 10;
+		hit = 600;
+		indirectHit = 200;
+		indirectHitRange = 4;
 		cost = 1000;	
 
 		laserLock = 1;
@@ -214,9 +230,9 @@ class CfgAmmo
 		missileLockMaxDistance = 8000;
 		missileLockMinDistance = 500;
 		missileLockMaxSpeed = 56;
-		missileLockCone = 40;
-		missileKeepLockedCone = 40;
-		missileManualControlCone = 40;
+		missileLockCone = 90;
+		missileKeepLockedCone = 90;
+		missileManualControlCone = 90;
 		weaponLockSystem = "4 + 16";
 		weaponType = "missileAA";
 		class Components : Components
@@ -252,9 +268,9 @@ class CfgAmmo
 		model = "\fza_ah64_US\fza_agm114c";
 		proxyShape="\fza_ah64_US\fza_agm114c";
 		effectsmissile = "missile3";	
-		hit = 800;
-		indirectHit = 400;
-		indirectHitRange = 10;
+		hit = 200;
+		indirectHit = 80;
+		indirectHitRange = 4;
 		cost = 1000;
 	};
 	class fza_agm114c : fza_agm114k
@@ -262,19 +278,23 @@ class CfgAmmo
 		fza_salType = "sal1";
 		model = "\fza_ah64_US\fza_agm114c";
 		proxyShape="\fza_ah64_US\fza_agm114c";		
-		hit= 800;
-		indirectHit = 400;
-		indirectHitRange = 10;
+		hit= 260;
+		indirectHit = 100;
+		indirectHitRange = 4;
 		cost = 1000;
 	};
 	class fza_agm114m : fza_agm114k
 	{
+
+		ace_frag_enabled = 1;
+		ace_frag_skip = 0;
+		ace_frag_force = 1;
 		fza_salType = "sal2";
 		model = "\fza_ah64_US\fza_agm114k";
 		proxyShape ="\fza_ah64_US\fza_agm114k";		
-		hit = 900;
-		indirectHit = 500;
-		indirectHitRange = 20;
+		hit = 100;
+		indirectHit = 100;
+		indirectHitRange = 40;
 		cost = 1000;
 	};
 	class fza_agm114n : fza_agm114k
@@ -282,9 +302,9 @@ class CfgAmmo
 		fza_salType = "sal2";	
 		model = "\fza_ah64_US\fza_agm114k";
 		proxyShape = "\fza_ah64_US\fza_agm114k";	
-		hit = 600;
-		indirecthit = 600;
-		indirecthitrange = 20;
+		hit = 200;
+		indirecthit = 200;
+		indirecthitrange = 12;
 		explosionEffects = "BombExplosion";
 		cost = 1000;
 	};
@@ -295,6 +315,10 @@ class CfgAmmo
 	
 	class fza_275_base: MissileBase 
 	{
+
+		ace_frag_enabled = 0;
+		ace_frag_skip = 1;
+
 		fza_wpnPageIconB = "";
 		fza_wpnPageIconG = "";
 		fza_shortCode = "";
@@ -305,7 +329,7 @@ class CfgAmmo
 		effectsmissile = "fza_ah64_rocketsmoke";
 		effectsMissileInit = "MissileDAR1";
 		muzzleEffect = "BIS_fnc_effectFiredHeliRocket";
-		hit=210;
+		hit=60;
 		indirectHit=20;
 		indirectHitRange=10;
 		manualControl = 0;
@@ -339,9 +363,9 @@ class CfgAmmo
 		model = "\fza_ah64_us\weps\fza_hydra_m151_wep";
 		proxyShape = "\fza_ah64_us\fza_hydra_m151";	
 		explosionEffects = "GrenadeExplosion";
-		hit=200;
-		indirectHit=100;
-		indirectHitRange=10;
+		hit=60;
+		indirectHit=40;
+		indirectHitRange=13;
 	};			
 	class fza_275_m229: fza_275_base
 	{
@@ -351,8 +375,8 @@ class CfgAmmo
 		model = "\fza_ah64_us\weps\fza_hydra_m229_wep";	
 		proxyShape = "\fza_ah64_us\fza_hydra_m229";	
 		explosionEffects = "GrenadeExplosion";
-		hit=300;
-		indirectHit=150;
+		hit=100;
+		indirectHit=66;
 		indirectHitRange=20;
 		suppressionRadiusHit = 20;
 
@@ -427,8 +451,8 @@ class CfgAmmo
 		explosionEffects = "ExploAmmoExplosion";
 		CraterEffects = "ExploAmmoCrater";
 		muzzleEffect = "BIS_fnc_effectFiredHeliRocket";
-		hit = 300;
-		indirectHit = 70;
+		hit = 30;
+		indirectHit = 15;
 		indirectHitRange = 20;
 		visibleFire = 1;
 		audibleFire = 30;
@@ -488,9 +512,9 @@ class CfgAmmo
 		explosioneffects = "AAMissileExplosion";
 		muzzleEffect = "fza_ah64_fx_msl_shake";
 		fusedistance = 5;
-		hit = 700;
-		indirecthit = 65;
-		indirecthitrange = 4;
+		hit = 450;
+		indirecthit = 120;
+		indirecthitrange = 8;
 		inittime = 0.25;
 		irlock = 1;
 		maneuvrability = 4;
