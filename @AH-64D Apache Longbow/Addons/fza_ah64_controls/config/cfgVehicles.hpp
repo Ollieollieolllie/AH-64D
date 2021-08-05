@@ -501,14 +501,14 @@ class CfgVehicles
 				convexComponent = "cockpit";
 				minimalHit = 0.05;
 				radius = 0.4;
-			};
+			};/*
 			class HitTransmission
 			{
 				armor = 0.8;
 				material = -1;
 				name = "trans";
 				passthrough = 0.25;
-			};
+			};*/
 			class HitEngine1
 			{
 				armor = 0.7;
@@ -533,7 +533,7 @@ class CfgVehicles
 				armor = 0.8;
 				material = 51;
 				name = "trans";
-				passthrough = 0.25;
+				passthrough = 0;
 				visual = "trans";
 				explosionShielding = 3;
 				convexComponent = "trans";
@@ -559,7 +559,7 @@ class CfgVehicles
 			{
 				armor = 0.5;
 				material = 51;
-				name = "lfab";
+				name = "IR Jammer"; // renamed for the purpose of knowing what to repair to get jammers working
 				passthrough = 0.1;
 				visual = "skin_lefab";
 			};
@@ -567,7 +567,7 @@ class CfgVehicles
 			{
 				armor = 0.5;
 				material = 51;
-				name = "rfab";
+				name = "RF Jammer"; // renamed for the purpose of knowing what to repair to get jammers working
 				passthrough = 0.1;
 				visual = "skin_refab";
 			};
@@ -789,7 +789,7 @@ class CfgVehicles
 				priority=0;
 				condition="(player == driver this || player == gunner this) && (currentweapon this isKindOf [""fza_hydra70"", configFile >> ""CfgWeapons""])";
 				shortcut="Binocular";
-				statement="[this] call weaponRocketsalvo";
+				statement="[this] call fza_fnc_weaponRocketsalvo";
 			};
 			class hellfireTraj
 			{
@@ -998,8 +998,8 @@ class CfgVehicles
 		damageResistance=0.0055499999;
 		memorypointcm[] = {"flare_1_beg","Flare_2_beg"};
 		memorypointcmdir[] = {"flare_1_end","flare_2_end"};
-		weapons[] = {"fza_CMFlareLauncher"};
-		magazines[] = {"60Rnd_CMFlareMagazine"};
+	    weapons[] = {"fza_CMFlareLauncher","fza_AseIRjammer","fza_AseRFjammer"};
+		magazines[] = {"60Rnd_CMFlareMagazine","fza_IR_JAMMING","fza_RF_JAMMING"};
 		lockdetectionsystem = "8+4";
 		incomingMissileDetectionSystem = 16;
 		gunAimDown = 0;
@@ -1119,8 +1119,8 @@ class CfgVehicles
 				primary = 1;
 				primaryGunner = 1;
 				stabilizedInAxes = 3;
-				weapons[] = {"fza_ma_safe", "Laserdesignator_mounted", "fza_burstlimiter","fza_m230"};
-				magazines[] = {"fza_safe", "LaserBatteries", "fza_m230_1200"};
+				weapons[] = {"fza_ma_safe", "fza_Fx1", "fza_Fx2", "Laserdesignator_mounted", "fza_burstlimiter","fza_m230"};
+				magazines[] = {"fza_safe", "fza_Fb1", "fza_Fb2", "LaserBatteries", "fza_m230_1200"};
 				memoryPointsGetInGunner = "pos gunner";
 			    memoryPointsGetInGunnerDir = "pos gunner dir";
 			    memoryPointGun = "laserBegin";
@@ -1159,6 +1159,44 @@ class CfgVehicles
 				discretedistanceinitindex = 3;
 				isCopilot = 1;
 				usePiP=1;
+				class Reflectors
+				{
+					class cabin
+					{
+						color[]={0.306, 0.878, 0.349};
+						ambient[] = {0.306, 0.878, 0.349};
+						intensity = 25;
+						size = 1;
+						innerAngle = 30;
+						outerAngle = 150;
+						coneFadeCoef = 1;
+						position = "plt_floodlamps";
+						direction = "plt_memflood";
+						hitpoint = "plt_floodlamps";
+						selection = "plt_floodlamps";
+						useFlare = 0;
+						flareSize = 0;
+						flareMaxDistance = 0;
+						dayLight = 1;
+						blinking = 0;
+						class Attenuation
+						{
+							start           = 0;
+							constant        = 0;
+							linear          = 1;
+							quadratic       = 2;
+							hardLimitStart  = 0.65;
+							hardLimitEnd    = 1.9;
+						};
+					};
+					class cargo_light_1: cabin
+					{
+						position = "cpg_flood";
+						direction = "cpg_memflood";
+						hitpoint = "cpg_flood";
+						selection = "cpg_flood";
+					};
+				};
 				class HitPoints
 				{
 					class HitTurret
@@ -2954,87 +2992,7 @@ initPhase=0;
 					hardLimitEnd = 200;
 				};
 			};
-		/*
-			class Flood
-			{
-				position = "plt_floodlamps";
-				direction = "plt_memflood";
-				hitpoint = "plt_floodlamps";
-				selection = "plt_floodlamps";
-				color[] = {0.306,0.878,0.349};
-				ambient[] = {0.008500, 0.009500, 0.010000};
-				intensity = 90;
-				size = 1;
-				useFlare = 0;
-				flareSize = 0;
-				flareMaxDistance = 0;
-				daylight = 1;		//added
-				class Attenuation {
-					start = 0;
-					constant = 0;
-					linear = 1;
-					quadratic = 2;
-					hardLimitStart = 0.20;
-					hardLimitEnd = 1;
-				};
-			};
-		*/
 		};
-		/*
-		class CompartmentsLights
-        {
-            class Comp1
-            {
-                class Light_Pilot
-                {
-                    color[]             = {0.306,0.878,0.349};
-                    ambient[]           = {0.008500, 0.009500, 0.010000};
-                    intensity           = 90;
-                    size                = 1;
-                    useFlare            = 0;
-                    flareSize           = 0;
-                    flareMaxDistance    = 0;
-                    dayLight            = 1;
-                    blinking            = 0;
-					point = "plt_floodlamps";
-                    class Attenuation
-                    {
-                        start           = 0;
-                        constant        = 0;
-                        linear          = 1;
-                        quadratic       = 2;
-                        hardLimitStart  = 0.20;
-                        hardLimitEnd    = 1;
-                    };
-                };
-            };
-            class Comp2
-            {
-                class Light_Gunner
-                {
-                    color[]             = {0.306,0.878,0.349};
-                    ambient[]           = {0.008500, 0.009500, 0.010000};
-                    intensity           = 30;
-                    size                = 1;
-                    useFlare            = 0;
-                    flareSize           = 0;
-                    flareMaxDistance    = 0;
-                    dayLight            = 1;
-                    blinking            = 0;
-                    point = "cpg_memflood";
-                    class Attenuation
-                    {
-                        start           = 0;
-                        constant        = 0;
-                        linear          = 1;
-                        quadratic       = 2;
-                        hardLimitStart  = 0.20;
-                        hardLimitEnd    = 1;
-                    };
-                };
-            };
-        };
-		*/
 	#include "sensor_b2e.hpp"
 	};
 	class fza_ah64d_b2e_nr: fza_ah64d_b2e
