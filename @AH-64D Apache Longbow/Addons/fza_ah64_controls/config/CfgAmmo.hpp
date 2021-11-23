@@ -71,7 +71,7 @@ class CfgAmmo
         ace_frag_charge = 85;  // Amount of explosive filler (grams) - information below
         ace_frag_gurney_c = 2377;  // w/PBXN-5 Explosive Fill
         ace_frag_gurney_k = 3/5;
-        ace_frag_classes[] = {"ACE_frag_large"};
+        ace_frag_classes[] = {"ACE_frag_small_HD"};
         ace_frag_skip = 0;
         ace_frag_force = 1;
     
