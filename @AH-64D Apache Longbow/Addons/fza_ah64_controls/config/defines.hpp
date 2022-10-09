@@ -24,3 +24,4 @@
 #define CanSeeAll 31
 
 #define StabilizedInAxesBoth 3
+#define StabilizedInAxesXYZ 4
