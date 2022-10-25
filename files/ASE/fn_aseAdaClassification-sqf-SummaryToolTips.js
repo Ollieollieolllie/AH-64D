@@ -1,1 +1,1 @@
-﻿NDSummary.OnToolTipsLoaded("File:ASE/fn_aseAdaClassification.sqf",{142:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">handles returns anti air classification</div></div>"});
+﻿NDSummary.OnToolTipsLoaded("File:ASE/fn_aseAdaClassification.sqf",{122:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">handles returns anti air classification</div></div>"});
