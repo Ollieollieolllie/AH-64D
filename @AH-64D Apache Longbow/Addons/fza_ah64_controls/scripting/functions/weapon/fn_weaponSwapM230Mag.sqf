@@ -13,4 +13,6 @@ if (_phase > 0.5) then {
     _heli setVariable ["fza_ah64_IAFSInstalled", true, true];
 };
 
+_heli setAmmo ["fza_m230", 0];
+
 [_heli] call fza_sfmplus_fnc_coreConfig;
