@@ -144,5 +144,11 @@ class CfgFunctions
             class setTailNumber {R;};
             class configToHashMap {R;};
         };
+		class Simulate
+		{
+			file  = "\fza_ah64_controls\scripting\functions\Simulate";
+			class SimulateBlades {R;};
+			class SimulateProbes {R;};
+		}
     };
 };
