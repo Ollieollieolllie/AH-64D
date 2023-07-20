@@ -85,83 +85,17 @@ class Sounds
             frequency = "0.66 + rotorSpeed / 3";
             volume = "(1 - camPos) * (transmissionDamage factor [0.45, 0.5]) * (rotorSpeed factor [0.2, 0.5])";
         };
-        class rotorLowAlarmInt
-        {
-            sound[] = {"\fza_ah64_audio\audio\systems\bt_rotor_rpm_low.ogg", 1, 1.000000};
-            frequency = 1;
-            volume = "engineOn * (1 - camPos) * (rotorSpeed factor [0.9, 0.8999]) * (rotorSpeed factor [-0.5, 1]) * (speed factor [3, 3.01])";
-        };
-        class scrubLandInt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\wheelsInt", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "2 * (1-camPos) * (scrubLand factor[0.02, 0.05]) * (1 - (lateralMovement factor [0.7,1]))";
-        };
-        class scrubLandExt
-        {
-            sound[] = {"A3\Sounds_F\dummysound", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "camPos * (scrubLand factor[0.02, 0.05]) * (1 - (lateralMovement factor [0.7,1]))";
-        };
-        class scrubBuildingInt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\wheelsInt", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "(1-camPos) * (scrubBuilding factor[0.02, 0.05]) * (1 - (lateralMovement factor [0.7,1]))";
-        };
-        class scrubBuildingExt
-        {
-            sound[] = {"A3\Sounds_F\dummysound", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "camPos * (scrubBuilding factor[0.02, 0.05])";
-        };
-        class scrubTreeInt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\scrubTreeInt", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "(1 - camPos) * ((scrubTree) factor [0, 0.01])";
-        };
-        class scrubTreeExt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\scrubTreeExt", 1.000000, 1.000000, 100};
-            frequency = 1;
-            volume = "camPos * ((scrubTree) factor [0, 0.01])";
-        };
         class RainExt
         {
             sound[] = {"\fza_ah64_us\audio\Ext_Rain.ogg", 1.000000, 1.000000, 100};
             frequency = 1;
-            volume = "camPos * (rain - rotorSpeed/2) * 2";
+            volume = "((rain*abs(rotorspeed-1)) * 15) * camPos";
         };
         class RainInt
         {
             sound[] = {"\fza_ah64_us\audio\Int_Rain.ogg", 1.000000, 1.000000, 100};
             frequency = 1;
-            volume = "(1-camPos)*(rain - rotorSpeed/2)*2";
-        };
-        class SlingLoadDownExt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\SL_engineDownEXT", 1.258925, 1.000000, 500};
-            frequency = 1;
-            volume = "camPos*(slingLoadActive factor [0,-1])";
-        };
-        class SlingLoadUpExt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\SL_engineupEXT", 1.258925, 1.000000, 500};
-            frequency = 1;
-            volume = "camPos*(slingLoadActive factor [0,1])";
-        };
-        class SlingLoadDownInt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\SL_engineDownINT", 1.000000, 1.000000, 500};
-            frequency = 1;
-            volume = "(1-camPos)*(slingLoadActive factor [0,-1])";
-        };
-        class SlingLoadUpInt
-        {
-            sound[] = {"A3\Sounds_F\vehicles\air\noises\SL_engineUpINT", 1.000000, 1.000000, 500};
-            frequency = 1;
-            volume = "(1-camPos)*(slingLoadActive factor [0,1])";
+            volume = "((rain*(abs(rotorspeed-1)) * 7) * abs(camPos - 1)";
         };
         class WindInt
         {
