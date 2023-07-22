@@ -89,13 +89,13 @@ class Sounds
         {
             sound[] = {"\fza_ah64_us\audio\Ext_Rain.ogg", 1.000000, 1.000000, 100};
             frequency = 1;
-            volume = "((rain*abs(rotorspeed-1)) * 15) * camPos";
+            volume = "(camPos*(rain))* 3";
         };
         class RainInt
         {
             sound[] = {"\fza_ah64_us\audio\Int_Rain.ogg", 1.000000, 1.000000, 100};
             frequency = 1;
-            volume = "((rain*(abs(rotorspeed-1)) * 7) * abs(camPos - 1)";
+            volume = "((1-camPos)*(rain))* 2";
         };
         class WindInt
         {
