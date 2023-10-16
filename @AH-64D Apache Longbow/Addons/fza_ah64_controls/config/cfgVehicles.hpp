@@ -26,6 +26,7 @@ class CfgVehicles
         #include "cfgVehicles\userActions.hpp"
         #include "cfgVehicles\acre.hpp"
         #include "cfgVehicles\itcAir.hpp"
+        #include "cfgVehicles\physx.hpp"
 
         //Sensors definition
         receiveRemoteTargets    = 1;
