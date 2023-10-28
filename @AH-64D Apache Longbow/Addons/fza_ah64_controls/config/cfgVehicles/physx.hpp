@@ -1,7 +1,8 @@
-maxOmega			= 2000;
 numberPhysicalWheels = 3;
+driveOnComponent[]	= {wheels};
 class Wheels
 {
+    disableWheelsWhenDestroyed = 1;
     class LF
     {
         steering                    = false;
@@ -11,40 +12,31 @@ class Wheels
         tireForceAppPointOffset     = "gear_left_axis";
         center                      = "gear_left_axis";
         boundary                    = "gear_left_radius";
-        suspTravelDirection[]       = {0, -1, -1};
+        suspTravelDirection[]       = {0, -1, 0};
         width                       = 0.40;
         mass                        = 30;
         MOI                         = 0.38;		// radius 0.38m
 
-        dampingRate                 = 0;
+        dampingRate                 = 0.1;
         dampingRateDamaged          = 0;
         dampingRateDestroyed        = 0;
 
-        maxBrakeTorque              = 2000;
-        maxHandBrakeTorque          = 2000;
+        maxBrakeTorque              = 0;
+        maxHandBrakeTorque          = 0;
 
-        maxCompression              = 0.23;
-        maxDroop                    = 0.0;
+        maxCompression              = 0.2;
+        maxDroop                    = 0;
 
         sprungMass                  = 3400;
-        springStrength              = 12000;
+        springStrength              = 3000;
         springDamperRate            = 1280;
 
-        longitudinalStiffnessPerUnitGravity	= 5000;
-        latStiffX                   = 25;
-        latStiffY                   = 180;
+        longitudinalStiffnessPerUnitGravity	= 0;
+        latStiffX                   = 0;
+        latStiffY                   = 0;
         frictionVsSlipGraph[]       = {{0, 1}, {0.5, 1}, {1,1}};
 
         brakeIdleSpeed              = 3;
-        class complexGearbox
-        {
-            GearboxRatios[] = {"N",0};
-            TransmissionRatios[] = {"High",4.111}; // Optional: defines transmission ratios (for example, High and Low range as commonly found in offroad vehicles)
-            moveOffGear			= 0; // defines what gear an automatic or semi-automatic gearbox will move off from stationary in. 1 by default.
-            driveString			= "N"; // string to display in the HUD for forward gears.
-            neutralString		= "N"; // string to display in the HUD for neutral gear.
-            reverseString		= "N"; // string to display in the HUD for reverse gears.
-        };
     };
     class LR: LF
     {

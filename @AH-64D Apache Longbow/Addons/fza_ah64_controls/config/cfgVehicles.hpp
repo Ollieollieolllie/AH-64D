@@ -62,7 +62,6 @@ class CfgVehicles
         cargoGetInAction[] = {"GetInHigh","GetInHigh"};
         cargoGetOutAction[] = {"GetOutHigh","GetOutHigh"};
         destrtype = "DestructWreck";
-        driveOnComponent[] = {"Wheels"};
         driverCanSee = 1+2+4+8;
         driverlefthandanimname = "p_collective";
         driverleftleganimname = "pedalL";
