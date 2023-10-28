@@ -63,3 +63,6 @@ if (_system == "reng") then {
         [_heli, "right"] spawn fza_fnc_damageEngineFire;
     };
 };
+
+systemchat str _damage;
+systemchat str _oldDam;
