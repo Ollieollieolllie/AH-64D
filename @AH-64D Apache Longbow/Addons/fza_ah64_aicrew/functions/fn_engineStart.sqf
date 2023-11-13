@@ -22,39 +22,50 @@ Author:
     Snow(Dryden)
 ---------------------------------------------------------------------------- */
 params ["_heli", "_engineState"];
+systemChat str _heli;
+systemChat str _engineState;
 
-if ((isplayer driver _heli == false) && _engineState == false && (_heli getVariable ["fza_ah64_aiESStop", true] == true)) then {
-    _heli setVariable ["fza_ah64_aiESStop", false];
-    //Ai Start up sequence
-    [_heli, "fza_ah64_rtrbrake", false] call fza_fnc_animSetValue;
-    _heli setVariable ["fza_systems_battSwitchOn",  true, true];
-    sleep 3;
-    _heli setVariable ["fza_systems_apuBtnOn", true, true];
+if !(!(isPlayer driver _heli) || (alive driver _heli) || (currentpilot _heli == driver _heli)) exitWith {};
 
-    sleep 10;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-	[_heli, "fza_sfmplus_engState", 0, "STARTING", true] call fza_fnc_setArrayVariable;
+switch (_engineState) do {
+    case true: {
+        [_heli, "fza_ah64_rtrbrake", false] call fza_fnc_animSetValue;
+        _heli setVariable ["fza_systems_battSwitchOn",  true, true];
+        sleep 3;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        _heli setVariable ["fza_systems_apuBtnOn", true, true];
 
-    sleep 4;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-    [_heli, 0, "IDLE"] spawn fza_sfmplus_fnc_interactPowerLever;
+        sleep 10;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        [_heli, "fza_sfmplus_engState", 0, "STARTING", true] call fza_fnc_setArrayVariable;
 
-    sleep 6;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-	[_heli, "fza_sfmplus_engState", 1, "STARTING", true] call fza_fnc_setArrayVariable;
+        sleep 4;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        [_heli, 0, "IDLE"] spawn fza_sfmplus_fnc_interactPowerLever;
 
-    sleep 4;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-    [_heli, 1, "IDLE"] call fza_sfmplus_fnc_interactPowerLever;
+        sleep 6;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        [_heli, "fza_sfmplus_engState", 1, "STARTING", true] call fza_fnc_setArrayVariable;
 
-    sleep 12;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-    [_heli, 0, "FLY"] call fza_sfmplus_fnc_interactPowerLever;
-    [_heli, 1, "FLY"] call fza_sfmplus_fnc_interactPowerLever;
+        sleep 4;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        [_heli, 1, "IDLE"] call fza_sfmplus_fnc_interactPowerLever;
 
-    sleep 10;
-    if (_heli getVariable "fza_ah64_aiESStop") exitwith {[_heli] call fza_aiCrew_fnc_getout};
-    _heli setVariable ["fza_systems_apuBtnOn", false, true];
+        sleep 12;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        [_heli, 0, "FLY"] call fza_sfmplus_fnc_interactPowerLever;
+        [_heli, 1, "FLY"] call fza_sfmplus_fnc_interactPowerLever;
 
-    _heli setVariable ["fza_ah64_aiESStop", false];
+        sleep 10;
+        if !((!isPlayer driver _heli) && (alive driver _heli) && (currentpilot _heli == driver _heli)) exitWith {};
+        _heli setVariable ["fza_systems_apuBtnOn", false, true];
+    };
+    case false: {
+        _heli setVariable ["fza_sfmplus_engState",              ["OFF", "OFF"]];
+        _heli setVariable ["fza_sfmplus_engPowerLeverState",    ["OFF", "OFF"]];
+        [_heli, "fza_ah64_powerLever1", 0, 10] call fza_fnc_animSetValue;
+        [_heli, "fza_ah64_powerLever2", 0, 10] call fza_fnc_animSetValue;
+        _heli setVariable ["fza_systems_apuBtnOn", false, true];
+        _heli engineon false;
+    };
 };
