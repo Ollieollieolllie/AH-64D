@@ -98,7 +98,7 @@ if (_value) then {
             if (_heli getVariable "fza_ah64_was" == WAS_WEAPON_RKT) then {
                 [_heli, WAS_WEAPON_NONE] call fza_fnc_weaponActionSwitch;
             } else {
-                [_heli, WAS_WEAPON_RKT] call fza_fnc_weaponActionSwitch;
+                [_heli, WAS_WEAPON_GUN] call fza_fnc_weaponActionSwitch;
             };
         };
         case "fza_ah64_wasMsl": {
