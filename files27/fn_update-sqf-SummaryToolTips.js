@@ -1,0 +1,1 @@
+﻿NDSummary.OnToolTipsLoaded("File27:fn_update.sqf",{10:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">handles the ufd textures</div></div>"});

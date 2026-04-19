@@ -1,0 +1,1 @@
+﻿NDFramePage.OnPageTitleLoaded("File23:fn_getAltitude.sqf","fn_getAltitude.sqf");NDSummary.OnSummaryLoaded("File23:fn_getAltitude.sqf",[["SQF","SQF"]],[["Functions","Function"],["Groups","Group"]],[[145,0,1,"Functions","Functions"],[146,0,0,"fza_sfmplus_fnc_getAltitude","fza_sfmplus_fnc_getAltitude"]]);

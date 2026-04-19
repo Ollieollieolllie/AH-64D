@@ -1,0 +1,1 @@
+﻿NDSummary.OnToolTipsLoaded("File12:fn_cycleNts.sqf",{326:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">cycle the targeting system to the next FCR target</div></div>"});
