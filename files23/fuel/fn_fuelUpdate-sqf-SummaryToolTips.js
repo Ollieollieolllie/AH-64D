@@ -1,1 +1,1 @@
-﻿NDSummary.OnToolTipsLoaded("File23:fuel/fn_fuelUpdate.sqf",{66:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">Sets the initial fuel state of the aircraft.</div></div>"});
+﻿NDSummary.OnToolTipsLoaded("File23:fuel/fn_fuelUpdate.sqf",{70:"<div class=\"NDToolTip TFunction LSQF\"><div class=\"TTSummary\">Sets the initial fuel state of the aircraft.</div></div>"});
