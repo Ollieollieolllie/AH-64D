@@ -1,0 +1,1 @@
+﻿NDFramePage.OnPageTitleLoaded("File10:shot/fn_shotIdentFromFcrData.sqf","fn_shotIdentFromFcrData.sqf");NDSummary.OnSummaryLoaded("File10:shot/fn_shotIdentFromFcrData.sqf",[["SQF","SQF"]],[["Functions","Function"],["Groups","Group"]],[[347,0,1,"Functions","Functions"],[348,0,0,"fza_dms_fnc_shotIdentFromFcrData","fza_dms_fnc_shotIdentFromFcrData"]]);
