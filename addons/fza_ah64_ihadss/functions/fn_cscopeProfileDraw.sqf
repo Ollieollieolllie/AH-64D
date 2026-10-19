@@ -7,7 +7,8 @@ Description:
     C-SCP are selected in the IHADSS colour: line 1 solid, lines 2-4 dashed,
     as many lines as the TPM page LINES setting. Lines are clipped to
     the HDU glass and display field like the other symbology, so nothing
-    outside it is turned into draw calls.
+    outside it is turned into draw calls. With NVS MODE FIXED they are drawn
+    where the terrain is in the fixed forward picture, not in the world.
 
 Parameters:
     _ctrl - The canvas map control (covers the screen)
@@ -118,8 +119,11 @@ private _clip = {
 private _colCount = count (_lines # 0);
 private _stride   = (round (3 / _colWidth)) max 1;
 
-// Only the columns near the view can reach the HDU: +-35 deg around the camera bearing
-private _camDir = getCameraViewDirection player;
+// NVS MODE FIXED: in the fixed forward picture (fza_ihadss_fnc_nvsFixedView)
+private _fixedView = [_heli] call fza_ihadss_fnc_nvsFixedView;
+
+// Only the columns near the view can reach the HDU: +-35 deg around the bearing it looks along
+private _camDir = [getCameraViewDirection player, (_fixedView # 1) # 0] select (_fixedView isNotEqualTo []);
 private _camRel = ((((_camDir # 0) atan2 (_camDir # 1)) - _leftBearing) + 720) % 360;
 if (_camRel > 270) then { _camRel = _camRel - 360; };
 private _iFrom  = ((floor ((_camRel - 35) / _colWidth)) max 0);
@@ -134,7 +138,7 @@ for "_li" from 0 to (_lineCount - 1) do {
     private _screen = [];
     for "_i" from _iFrom to _iTo step _stride do {
         private _p = _points # _i;
-        _screen pushBack (if (_p isEqualTo []) then { [] } else { worldToScreen (ASLToAGL _p) });
+        _screen pushBack (if (_p isEqualTo []) then { [] } else { [_fixedView, _p] call fza_ihadss_fnc_nvsFixedToScreen });
     };
 
     // Runs of map points inside the HDU

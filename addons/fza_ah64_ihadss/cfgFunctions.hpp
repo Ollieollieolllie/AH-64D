@@ -27,6 +27,8 @@ class CfgFunctions
             class linearMotionCompensator {R;};
             class monocletoggle {R;};
             class nvsBias {R;};
+            class nvsFixedToScreen {R;};
+            class nvsFixedView {R;};
             class nvsState {R;};
             class pnvsControl {R;};
             class tadsNvs {R;};

@@ -220,11 +220,13 @@ if (_was == WAS_WEAPON_RKT) then {
 
 private _tpm = (_heli getVariable ["fza_ah64_fcrMode", 0]) == FCR_DISP_MODE_TPM;
 if (_tpm && {!_tadsVideo} && {_heli getVariable ["fza_ah64_fcrcscope", false]} && {cameraView != "GUNNER"}) then {
-    // TPM: the obstacle picture at structure tops, nearest first, on the HMD only
+    // TPM: the obstacle picture at structure tops, nearest first, on the HMD only; with NVS MODE FIXED where they are
+    // in the fixed forward picture, as the C-scope lines (fza_ihadss_fnc_nvsFixedView)
+    private _fixedView = [_heli] call fza_ihadss_fnc_nvsFixedView;
     {
         if (_forEachIndex > 63) exitWith {};
         if (count _x > 2) then {
-            ["tgt" + str _forEachIndex, ("fcrObstacle" call _fcrTex), worldToScreen ASLToAGL _x, 30] call _place;
+            ["tgt" + str _forEachIndex, ("fcrObstacle" call _fcrTex), [_fixedView, _x] call fza_ihadss_fnc_nvsFixedToScreen, 30] call _place;
         };
     } forEach (_heli getVariable ["fza_ah64_fcrTPMObsDisplay", []]);
 };

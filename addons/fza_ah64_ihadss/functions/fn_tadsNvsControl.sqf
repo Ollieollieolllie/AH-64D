@@ -98,7 +98,11 @@ private _dt    = (["fza_ihadss_tadsNvsSlew"] call BIS_fnc_deltaTime) min 0.1;
 private _los   = _heli getVariable ["fza_ihadss_tadsNvsLos", [_turAz + _offAz, _turEl + _offEl]];
 
 private _want = switch (_mode) do {
-    case NVS_MODE_FIXED: {[0, NVS_FIXED_EL]};
+    // With the crew station's correction, as the PNVS, so the picture is the view along the fixed LOS
+    case NVS_MODE_FIXED: {
+        ([_heli, _seat, 0] call fza_ihadss_fnc_nvsBias) params ["_azBias", "_elBias"];
+        [_azBias, NVS_FIXED_EL + _elBias]
+    };
     case NVS_MODE_NORM: {
         ((_heli vectorWorldToModelVisual getCameraViewDirection player) call CBA_fnc_vect2Polar) params ["", "_az", "_el"];
         _az = [_az] call CBA_fnc_simplifyAngle180;
