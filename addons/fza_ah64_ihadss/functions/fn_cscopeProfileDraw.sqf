@@ -22,16 +22,10 @@ Author:
 #include "\fza_ah64_ihadss\headers\hdu.h"
 params ["_ctrl"];
 
+// Faded until its view far off the map has applied; fza_ihadss_fnc_htmlIcons shows it, as a fully faded control may
+// never draw to show itself
 _ctrl ctrlMapAnimAdd [0, 0.001, [-99999, -99999]];
 ctrlMapAnimCommit _ctrl;
-if (ctrlFade _ctrl > 0) then {
-    private _firstFrame = _ctrl getVariable ["fza_ihadss_firstFrame", -1];
-    if (_firstFrame < 0) exitWith {_ctrl setVariable ["fza_ihadss_firstFrame", diag_frameNo]};
-    if (diag_frameNo > _firstFrame + 1) then {
-        _ctrl ctrlSetFade 0;
-        _ctrl ctrlCommit 0;
-    };
-};
 
 private _heli = vehicle player;
 if (!(_heli isKindOf "fza_ah64base") || { driver _heli != player && gunner _heli != player }) exitWith {};
