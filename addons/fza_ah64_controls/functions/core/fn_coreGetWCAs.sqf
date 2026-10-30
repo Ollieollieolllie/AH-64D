@@ -629,8 +629,13 @@ if ((_heli getVariable ["bmkhs_rotorBrakeVal", 0]) > 0
 if (_fcrState#0 == FCR_MODE_FAULT) then {
     _wcas pushBack [WCA_ADVISORY, "FCR FAULT", "FCR FAULT"];
 };
+//The parking brake locks the tail wheel too
 if (_onGnd) then {
-    _wcas pushBack [WCA_ADVISORY, "TAIL WHEEL LOCK SEL", "TW LOCK SEL"];
+    if (_heli getVariable ["fza_ah64_parkingBrake", true]) then {
+        _wcas pushBack [WCA_ADVISORY, "TAIL WHEEL LOCK SEL", "TW LOCK SEL"];
+    } else {
+        _wcas pushBack [WCA_ADVISORY, "TAIL WHEEL UNLK SEL", "TW UNLK SEL"];
+    };
 };
 
 //Auxilary Fuel tanks

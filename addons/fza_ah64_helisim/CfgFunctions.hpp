@@ -15,5 +15,11 @@ class CfgFunctions
             class perfData      {R;};
             class perfVariables {R;};
         };
+        class suspension {
+            file = "\fza_ah64_helisim\functions\suspension";
+            class suspensionLog       {R;};
+            class suspensionUpdate    {R;};
+            class suspensionVariables {R;};
+        };
     };
 };

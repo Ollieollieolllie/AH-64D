@@ -341,6 +341,9 @@ if (_value) then {
         case "fza_ah64_collectiveEmergJett": {
             _heli spawn fza_weapons_fnc_jettisonAll;
         };
+        case "fza_ah64_toggleParkingBrake": {
+            _heli setVariable ["fza_ah64_parkingBrake", !(_heli getVariable ["fza_ah64_parkingBrake", true]), true];
+        };
         // The CPG's LST mode switch
         case "fza_ah64_lstAuto";
         case "fza_ah64_lstOff";

@@ -13,4 +13,5 @@ Returns:
 params ["_heli"];
 
 [_heli] call bmkhs_fnc_coreUpdate;
+[_heli] call fza_ah64_helisim_fnc_suspensionUpdate;
 [_heli] call fza_ah64_helisim_fnc_perfData;

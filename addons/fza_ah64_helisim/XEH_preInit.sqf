@@ -6,6 +6,15 @@
 //lever and the engine stay in step. An axis-bound lever ignores this and tracks the hand.
 #define PWRLVR_IDLE_TO_FLY 0.75
 
+[
+    "fza_ah64_suspensionDebug",
+    "LIST",
+    ["Suspension log", "Writes the landing gear state to the RPT as FZASUSP lines."],
+    ["AH-64D Official Project", "Debug"],
+    [[0, 1, 2], ["Off", "10 times a second", "Every frame"], 0],
+    0
+] call CBA_fnc_addSetting;
+
 //This pack's airframe, from its own CfgPatches entry. Every installed pack schedules and
 //hears only its own aircraft, so two packs loaded together never touch each other's.
 fza_ah64_helisim_baseClass = getText (configFile >> "CfgPatches" >> "fza_ah64_helisim" >> "bmkhsBaseClass");
