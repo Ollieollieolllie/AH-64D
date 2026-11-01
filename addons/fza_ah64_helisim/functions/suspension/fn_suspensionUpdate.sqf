@@ -25,6 +25,8 @@ Returns:
 #define LONG_STEP_CANCEL_TAIL 0.16
 #define LONG_STEP_LOAD 1.25
 #define CARRIED_LOAD_LIMIT 1.25
+#define PARKED_COLLECTIVE 0.1
+#define PARKED_SPEED 1
 #define MAX_HEIGHT 5
 //Starts above the contact point, so a strut past its travel still finds the ground
 #define RAY_LEAD 1.0
@@ -51,6 +53,22 @@ private _struts  = _heli getVariable "fza_ah64_suspStruts";
 if (_skipped) then {
     {_prevArm set [_forEachIndex, []]} forEach _wheels;
 };
+
+//One lump of force a frame can't hold a strut over the steps time acceleration takes, so a
+//parked aircraft stays where it stands until time runs normally again. Single player only.
+private _pose   = _heli getVariable "fza_ah64_suspPose";
+private _parked = accTime > 1 && {(_heli getVariable ["bmkhs_collectiveOutput", 0]) < PARKED_COLLECTIVE};
+if (_parked && {_pose isEqualTo []} && {vectorMagnitude velocity _heli < PARKED_SPEED} && {(_struts findIf {_x isEqualTo []}) < 0}) then {
+    _pose = [getPosWorld _heli, vectorDir _heli, vectorUp _heli];
+    _heli setVariable ["fza_ah64_suspPose", _pose];
+};
+if (_parked && {_pose isNotEqualTo []}) exitWith {
+    _heli setPosWorld (_pose select 0);
+    _heli setVectorDirAndUp [_pose select 1, _pose select 2];
+    _heli setVelocity [0, 0, 0];
+    _heli setAngularVelocity [0, 0, 0];
+};
+_heli setVariable ["fza_ah64_suspPose", []];
 
 if (_dt > MAX_STEP
     || {(getPos _heli select 2) > MAX_HEIGHT}
@@ -151,7 +169,10 @@ private _log      = [];
     };
     _spring = (_spring + _seal) max 0;
 
-    _carried = if (_carried < 0) then {_spring} else {_carried + ((_spring - _carried) * ((_dt / _loadFilter) min 1))};
+    //First contact starts from the weight the wheel should carry: the spring alone can be far
+    //more than that on the first frame, and would throw the aircraft off the ground.
+    private _sprung = _mass * _share;
+    _carried = if (_carried < 0) then {_spring min (_sprung * GRAVITY)} else {_carried + ((_spring - _carried) * ((_dt / _loadFilter) min 1))};
     _carried = _carried min (CARRIED_LOAD_LIMIT * _spring);
     private _longStep = _dt > LONG_STEP;
     if (_longStep) then {_carried = _carried min (LONG_STEP_LOAD * _staticLoad)};
@@ -159,7 +180,6 @@ private _log      = [];
 
     //The load it carries goes on whole, and only what differs from that is solved implicitly.
     //Strut rate has no bias at rest, so the weight stays carried at any step length.
-    private _sprung  = _mass * _share;
     private _damping = (_damper * _dt) + (_rate * _dt * _dt);
     private _softer  = 1 + (_damping / _sprung);
     private _maxDamp = _dampingLimit * _staticLoad * _dt;

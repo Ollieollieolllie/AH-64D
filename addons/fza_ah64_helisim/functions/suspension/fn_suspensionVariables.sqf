@@ -62,3 +62,4 @@ _heli setVariable ["fza_ah64_suspFrame",   -1];
 _heli setVariable ["fza_ah64_suspPrevArm", _wheels apply {[]}];
 _heli setVariable ["fza_ah64_suspAnchors", _wheels apply {[]}];
 _heli setVariable ["fza_ah64_suspStruts",  _wheels apply {[]}];
+_heli setVariable ["fza_ah64_suspPose",    []];
