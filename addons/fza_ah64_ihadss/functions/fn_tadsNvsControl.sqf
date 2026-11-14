@@ -20,7 +20,14 @@ Description:
       stops reporting (leaves the seat, disconnects).
 
     While the TADS is an NVS sensor it cannot be the CPG's sight, nor linked
-    to the FCR; HMD and FCR remain, with flight symbology.
+    to the FCR; HMD and FCR remain, with flight symbology. While it is the
+    pilot's, the CPG's aim input does not slew it
+    (fza_ihadss_fnc_aimInputBlocked).
+
+    Run each frame before anything renders (fza_ah64_eachFrameArray), so the
+    turn is taken against the turret as this frame draws it. Set from Draw3D,
+    it could reach the TADS pictures a frame after the turret moved, and the
+    picture would jump with every turret movement.
 
 Parameters:
     _heli - The helicopter
@@ -39,6 +46,10 @@ Author:
 #include "\fza_ah64_controls\headers\systemConstants.h"
 #include "\bmkhs_helisim\functions\systems\systems.hpp"
 params ["_heli"];
+
+// Only where the IHADSS runs (fza_ihadss_fnc_controller): in the cockpit or the sight
+if (!isNull curatorCamera || {is3DEN} || {!(cameraView in ["INTERNAL", "GUNNER"])}
+    || {isRemoteControlling player && {!(getConnectedUAV player isKindOf "fza_ah64base")}} || {!isNil "fza_ah64_notargeting"}) exitWith {};
 
 ([_heli] call fza_ihadss_fnc_tadsNvs) params ["_mode", "_seat", "_unit"];
 

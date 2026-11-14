@@ -60,9 +60,9 @@ if (!(_heli getVariable ["fza_ah64_monocleinbox", true]) && {!([player] call fza
 
 private _deltaTime  = ["ihadss_deltaTime"] call BIS_fnc_deltaTime;
 
-// The TADS zoom is set each frame from fza_ah64_eachFrameArray (fza_ihadss_fnc_fovControl)
+// The TADS zoom and its turn as an NVS sensor are set each frame from fza_ah64_eachFrameArray (fza_ihadss_fnc_fovControl,
+// fza_ihadss_fnc_tadsNvsControl)
 [_heli] call fza_ihadss_fnc_pnvsControl;
-[_heli] call fza_ihadss_fnc_tadsNvsControl;
 [_heli] call fza_ihadss_fnc_draw;
 [_heli] call fza_ihadss_fnc_htmlDraw;
 [_heli, _deltaTime] call fza_ihadss_fnc_linearMotionCompensator;
